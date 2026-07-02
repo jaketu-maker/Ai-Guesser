@@ -5,6 +5,7 @@ void setup(){
 
 }
 void draw(){
+
   switch(currentState){
     case COVER:
     
@@ -17,4 +18,5 @@ void draw(){
     
     break;
   }
+
 }

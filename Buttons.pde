@@ -59,7 +59,7 @@ class Begin extends Buttons{
     text(text,x+w/2,y+h/2);
   }
   void action(){
-    currentState = AppStates.QUESTION;
+    currentState = AppStates.GENNEWQUESTION;
   }
 }
 class Ai extends Buttons{

@@ -12,6 +12,7 @@ class Buttons{
     this.h = h; 
     this.text = text;
     this.size = size;
+    
   }
   void show(){
     fill(255);
@@ -36,6 +37,13 @@ class Buttons{
     return false;
   }
   void action(){
+    currentState = AppStates.QUESTION;
     
+  }
+  void update(){
+    this.show();
+    if(this.isClicked()){
+      this.action();
+    }
   }
 }

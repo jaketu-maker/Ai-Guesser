@@ -1,9 +1,34 @@
+import java.io.File;
+
 enum AppStates{COVER,QUESTION,GRADE};
 AppStates currentState = AppStates.COVER;
 Buttons begin = new Buttons(400,500,200,40,"Begin",15);
 boolean mouseDown = false;
+ArrayList<PImage> RealImages = new ArrayList<PImage>();
+ArrayList<PImage> AIImages = new ArrayList<PImage>();
 void setup(){
  size(1000,700);
+ println(dataPath("/Real_Images"));
+ File Realfolder = new File(dataPath("/Real_Images"));
+ File[] listOfFiles = Realfolder.listFiles();
+ if (listOfFiles != null){
+   for (int i = 0; i <listOfFiles.length;i++){
+     if (listOfFiles[i].isFile()){
+       println("File: " + listOfFiles[i].getName());
+       RealImages.add(loadImage(dataPath("/Real_Images") +"\\"+ listOfFiles[i].getName()));
+     }
+   }
+ }
+ File AIfolder = new File(dataPath("/Ai_Images"));
+ File[] listOfAIFiles = AIfolder.listFiles();
+ if (listOfAIFiles != null){
+   for (int i = 0; i <listOfAIFiles.length;i++){
+     if (listOfAIFiles[i].isFile()){
+       println("File: " + listOfAIFiles[i].getName());
+       AIImages.add(loadImage(dataPath("/Ai_Images") +"\\"+ listOfAIFiles[i].getName()));
+     }
+   }
+ }
 }
 void draw(){
 

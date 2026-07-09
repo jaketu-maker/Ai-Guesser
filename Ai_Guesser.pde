@@ -8,7 +8,7 @@ Buttons real = new Real();
 boolean mouseDown = false;
 ArrayList<PImage> RealImages = new ArrayList<PImage>();
 ArrayList<PImage> AIImages = new ArrayList<PImage>();
-PImage question;
+PImage picture;
 String secretanswer = "";
 void setup(){
  background(255);
@@ -44,11 +44,11 @@ void draw(){
     case GENNEWQUESTION:
     int coin = floor(random(0,2));
     if (coin == 1){
-      question = RealImages.get(floor(random(0,RealImages.size())));
+      picture = RealImages.get(floor(random(0,RealImages.size())));
       secretanswer = "real";
     }
     if (coin == 0){
-      question = AIImages.get(0);
+      picture = AIImages.get(0);
       secretanswer = "ai";
     }
     
@@ -84,6 +84,7 @@ void cover(){
 }
 void question(){
   background(255);
+  image(picture,250,50);
   ai.update();
   real.update();
 }

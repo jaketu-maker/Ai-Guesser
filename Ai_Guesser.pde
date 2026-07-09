@@ -48,7 +48,8 @@ void draw(){
       secretanswer = "real";
     }
     if (coin == 0){
-      picture = AIImages.get(0);
+      picture = AIImages.get(floor(random(0,AIImages.size())));
+
       secretanswer = "ai";
     }
     

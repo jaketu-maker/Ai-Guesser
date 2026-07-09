@@ -1,6 +1,6 @@
 import java.io.File;
 
-enum AppStates{COVER,QUESTION,GRADE};
+enum AppStates{COVER,GENNEWQUESTION,QUESTION,ANSWER,GRADE};
 AppStates currentState = AppStates.COVER;
 Buttons begin = new Begin();
 Buttons ai = new Ai();
@@ -8,6 +8,8 @@ Buttons real = new Real();
 boolean mouseDown = false;
 ArrayList<PImage> RealImages = new ArrayList<PImage>();
 ArrayList<PImage> AIImages = new ArrayList<PImage>();
+PImage question;
+String secretanswer = "";
 void setup(){
  background(255);
  size(1000,700);
@@ -38,6 +40,21 @@ void draw(){
   switch(currentState){
     case COVER:
     cover();
+    break;
+    case GENNEWQUESTION:
+    int coin = floor(random(0,2));
+    if (coin == 1){
+      question = RealImages.get(floor(random(0,RealImages.size())));
+      secretanswer = "real";
+    }
+    if (coin == 0){
+      question = AIImages.get(0);
+      secretanswer = "ai";
+    }
+    
+    //pick a new image
+    //record what the secrect answer is for this image
+    currentState = AppStates.QUESTION;
     break;
     case QUESTION:
     question();

@@ -37,13 +37,44 @@ class Buttons{
     return false;
   }
   void action(){
-    currentState = AppStates.QUESTION;
-    
+  
   }
   void update(){
     this.show();
     if(this.isClicked()){
       this.action();
     }
+  }
+}
+class Begin extends Buttons{
+  public Begin(){
+    super(400,500,200,40,"Begin",15);
+  }
+  void show(){
+    fill(0,255,0);
+    rect(x,y,w,h);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    textSize(size);
+    text(text,x+w/2,y+h/2);
+  }
+  void action(){
+    currentState = AppStates.QUESTION;
+  }
+}
+class Ai extends Buttons{
+  public Ai(){
+    super(25,600,400,80,"AI",45);
+  }
+  void action(){
+    currentState = AppStates.ANSWER;
+  }
+}
+class Real extends Buttons{
+  public Real(){
+    super(575,600,400,80,"REAL",45);
+  }
+  void action(){
+    currentState = AppStates.ANSWER;
   }
 }

@@ -2,9 +2,9 @@ import java.io.File;
 
 enum AppStates{COVER,QUESTION,GRADE};
 AppStates currentState = AppStates.COVER;
-Buttons begin = new Buttons(400,500,200,40,"Begin",15);
-Buttons ai = new Buttons(25,600,400,80,"AI",45);
-Buttons real = new Buttons(575,600,400,80,"REAL",45);
+Buttons begin = new Begin();
+Buttons ai = new Ai();
+Buttons real = new Real();
 boolean mouseDown = false;
 ArrayList<PImage> RealImages = new ArrayList<PImage>();
 ArrayList<PImage> AIImages = new ArrayList<PImage>();

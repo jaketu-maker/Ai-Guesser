@@ -85,7 +85,20 @@ void cover(){
 }
 void question(){
   background(255);
-  image(picture,250,50);
+  //original width and height of the image
+  int imgWidth = picture.width;
+  int imgHeight = picture.height;
+  ////////////////////////////////////////
+  int newWidth = 0;
+  int newHeight = 0;
+  //what kind of math equation can you code 
+  //so that you can shrink the image down to the appropriate screen size
+  //but keep the same aspect ratio
+  float m = 380/imgHeight;
+  println(m);
+  newWidth = floor(imgWidth*m);
+  newHeight = floor(imgHeight*m);
+  image(picture,250,50,newWidth,newHeight);
   ai.update();
   real.update();
 }

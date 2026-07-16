@@ -48,11 +48,11 @@ void draw(){
     case GENNEWQUESTION:
     int coin = floor(random(0,2));
     if (coin == 1){
-      picture = RealImages.get(floor(random(0,RealImages.size())));
+      picture = RealImages.remove(floor(random(0,RealImages.size())));
       secretanswer = "real";
     }
     if (coin == 0){
-      picture = AIImages.get(floor(random(0,AIImages.size())));
+      picture = AIImages.remove(floor(random(0,AIImages.size())));
 
       secretanswer = "ai";
     }
@@ -95,20 +95,7 @@ void cover(){
 }
 void question(){
   background(255);
-  //original width and height of the image
-  int imgWidth = picture.width;
-  int imgHeight = picture.height;
-  ////////////////////////////////////////
-  int newWidth = 0;
-  int newHeight = 0;
-  //what kind of math equation can you code 
-  //so that you can shrink the image down to the appropriate screen size
-  //but keep the same aspect ratio
-  float m = 380.0f/imgHeight;
-  println(m);
-  newWidth = floor(imgWidth*m);
-  newHeight = floor(imgHeight*m);
-  image(picture,500-(0.5*newWidth),50,newWidth,newHeight);
+  image(picture,250,50);
   ai.update();
   real.update();
 }

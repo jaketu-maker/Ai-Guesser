@@ -1,15 +1,19 @@
 import java.io.File;
 
-enum AppStates{COVER,GENNEWQUESTION,QUESTION,ANSWER,GRADE};
+enum AppStates{COVER,GENNEWQUESTION,QUESTION,ANSWER,CHECKANSWER,GRADE};
 AppStates currentState = AppStates.COVER;
 Buttons begin = new Begin();
 Buttons ai = new Ai();
 Buttons real = new Real();
+Buttons next = new Next();
 boolean mouseDown = false;
 ArrayList<PImage> RealImages = new ArrayList<PImage>();
 ArrayList<PImage> AIImages = new ArrayList<PImage>();
 PImage picture;
 String secretanswer = "";
+String userAnswer = "";
+int score = 0;
+int total = 0;
 void setup(){
  background(255);
  size(1000,700);
@@ -57,12 +61,18 @@ void draw(){
     //record what the secrect answer is for this image
     currentState = AppStates.QUESTION;
     break;
+    case CHECKANSWER:
+    checkanswer();
+    break;
+    case ANSWER:
+    answer();
+    break;
     case QUESTION:
     question();
     break;
     
     case GRADE:
-    
+    grade();
     break;
   }
 
@@ -88,4 +98,31 @@ void question(){
   image(picture,250,50);
   ai.update();
   real.update();
+}
+void checkanswer(){
+  background(255);
+  if(userAnswer.equals(secretanswer)){
+    score++;
+    total++;
+    currentState = AppStates.ANSWER;
+  }
+  else{
+    total++;
+    currentState = AppStates.ANSWER;
+  }
+}
+void answer(){
+  if(userAnswer.equals(secretanswer)){
+    background(0,255,0);
+    text(""+score, 500,350);
+    next.update();
+  }
+  else{
+    background(255,0,0);
+    text(""+score, 500,350);
+    next.update();
+  }
+}
+void grade(){
+  background(255);
 }

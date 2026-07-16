@@ -67,7 +67,8 @@ class Ai extends Buttons{
     super(25,600,400,80,"AI",45);
   }
   void action(){
-    currentState = AppStates.ANSWER;
+    userAnswer = "ai";
+    currentState = AppStates.CHECKANSWER;
   }
 }
 class Real extends Buttons{
@@ -75,6 +76,21 @@ class Real extends Buttons{
     super(575,600,400,80,"REAL",45);
   }
   void action(){
-    currentState = AppStates.ANSWER;
+    userAnswer = "real";
+    currentState = AppStates.CHECKANSWER;
+  }
+}
+class Next extends Buttons{
+  public Next(){
+    super(400,500,200,40,"NEXT",45);
+  }
+  void action(){
+    if(total == 10){
+      currentState = AppStates.GRADE;
+    }
+    else{
+      currentState = AppStates.GENNEWQUESTION;
+    }
+    
   }
 }

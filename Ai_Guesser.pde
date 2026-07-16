@@ -94,11 +94,11 @@ void question(){
   //what kind of math equation can you code 
   //so that you can shrink the image down to the appropriate screen size
   //but keep the same aspect ratio
-  float m = 380/imgHeight;
+  float m = 380.0f/imgHeight;
   println(m);
   newWidth = floor(imgWidth*m);
   newHeight = floor(imgHeight*m);
-  image(picture,250,50,newWidth,newHeight);
+  image(picture,500-(0.5*newWidth),50,newWidth,newHeight);
   ai.update();
   real.update();
 }

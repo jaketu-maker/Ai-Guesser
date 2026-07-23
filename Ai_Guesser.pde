@@ -8,9 +8,12 @@ Buttons begin = new Begin();
 Buttons ai = new Ai();
 Buttons real = new Real();
 Buttons next = new Next();
+Buttons reset = new Reset();
 boolean mouseDown = false;
 ArrayList<PImage> RealImages = new ArrayList<PImage>();
 ArrayList<PImage> AIImages = new ArrayList<PImage>();
+ArrayList<PImage> realGarbage = new ArrayList<PImage>();
+ArrayList<PImage> aiGarbage = new ArrayList<PImage>();
 PImage picture;
 String secretanswer = "";
 String userAnswer = "";
@@ -75,11 +78,14 @@ void draw() {
     if (coin == 1) {
       picture = RealImages.remove(floor(random(0, RealImages.size())));
       secretanswer = "real";
+      realGarbage.add(picture);
+      
     }
     if (coin == 0) {
       picture = AIImages.remove(floor(random(0, AIImages.size())));
 
       secretanswer = "ai";
+      aiGarbage.add(picture);
     }
 
     //pick a new image
@@ -160,4 +166,29 @@ void answer() {
 }
 void grade() {
   background(255);
+  textSize(50);
+  text(""+score+"/10",500,300);
+  textSize(30);
+  if(score == 10){
+    text("GET OFF YOUR PHONE!!",500, 450);
+  }
+  else if(score >= 7 && score <= 9){
+    text("GEN Z",500, 450);
+  }
+  else if(score >= 4 && score <= 6){
+    text("UNC STATUS",500, 450);
+  }
+  else if(score >= 1 && score <= 3){
+    text("GRANDPA NEEDS A LITTLE HELP.",500, 450);
+  }
+  for(int i = 0;i < realGarbage.size();i++){
+    RealImages.add(realGarbage.get(i));
+  }
+  realGarbage.clear();
+  for(int i = 0;i < aiGarbage.size();i++){
+    AIImages.add(aiGarbage.get(i));
+  }
+  aiGarbage.clear();
+  reset.update();
+  
 }

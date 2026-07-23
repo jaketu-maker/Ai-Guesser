@@ -94,3 +94,13 @@ class Next extends Buttons{
     
   }
 }
+class Reset extends Buttons{
+  public Reset(){
+    super(400,600,200,40,"RESET",45);
+  }
+  void action(){
+    score = 0;
+    total = 0;
+    currentState = AppStates.COVER;
+  }
+}

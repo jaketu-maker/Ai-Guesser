@@ -12,16 +12,18 @@ Buttons reset = new Reset();
 boolean mouseDown = false;
 HashMap<String,PImage> RealImages = new HashMap<String,PImage>();
 HashMap<String,PImage> AIImages = new HashMap<String,PImage>();
-ArrayList<PImage> realGarbage = new ArrayList<PImage>();
-ArrayList<PImage> aiGarbage = new ArrayList<PImage>();
+ArrayList<String> realGarbage = new ArrayList<String>();
+ArrayList<String> aiGarbage = new ArrayList<String>();
 PImage picture;
+String pictureName;
 String secretanswer = "";
 String userAnswer = "";
 int score = 0;
 int total = 0;
 HashMap<String, String> AiDescriptions = new HashMap<String, String>();
 HashMap<String, String> RealDescriptions = new HashMap<String, String>();
-
+ArrayList<String> realNames;
+ArrayList<String> aiNames;
 void setup() {
   background(255);
   size(1000, 700);
@@ -73,6 +75,11 @@ void setup() {
   RealDescriptions.put("Image 9", "This image is clearly a genuine photograph because of the natural sunlight creating realistic highlights on the water and soft shadows across the rocky riverbank. The woman's pose, curly hair with natural movement, and clothing fabric show authentic details like subtle folds and skin tones under daylight. The driftwood log has realistic weathering, cracks, and texture, while the background river current and forested hills display proper atmospheric perspective and depth. Environmental elements like the varied rocks and distant vegetation follow natural landscape composition without AI repetition or lighting inconsistencies.");
   RealDescriptions.put("Image 10", "This is a genuine wildlife-style photograph shown by the cat's natural fur texture, individual whisker details, and realistic eye reflections with accurate pupil shape. The rocky foreground and foliage have organic randomness in placement and lighting that matches natural outdoor environments. The animal's pose and gaze direction create believable interaction with its surroundings, with soft natural bokeh in the background. Subtle environmental details like leaf variations and ground debris avoid the repetitive patterns often seen in AI animal generations.");
   RealDescriptions.put("Image 11", "This image displays clear markers of a genuine photograph taken by a human photographer rather than a digital creation. The lighting is completely natural and consistent, showing authentic direct sun casting sharp, physically accurate shadows under the man's arm and across the concrete steps. Small, organic imperfections—like the realistic fabric creases around his mask, the faint scar on his left wrist, and the natural wear on the metal handrails—demonstrate raw real-world texture. Furthermore, the text printed on his shirt is perfectly crisp, structured, and legible, avoiding the warped or scrambled characters typical of AI rendering. Finally, both of his hands exhibit natural anatomical proportions with realistic skin folding around the phone.");
+
+  
+  realNames = new ArrayList<>(RealImages.keySet());
+  aiNames = new ArrayList<>(AIImages.keySet());
+
 }
 void draw() {
 
@@ -83,16 +90,18 @@ void draw() {
   case GENNEWQUESTION:
     int coin = floor(random(0, 2));
     if (coin == 1) {
-      picture = RealImages.remove(floor(random(0, RealImages.size())));
+      pictureName = realNames.remove(floor(random(0,realNames.size())));
+      picture = RealImages.get(pictureName);
       secretanswer = "real";
-      realGarbage.add(picture);
+      realGarbage.add(pictureName);
       
     }
     if (coin == 0) {
-      picture = AIImages.remove(floor(random(0, AIImages.size())));
+      pictureName = aiNames.remove(floor(random(0,aiNames.size())));
+      picture = AIImages.get(pictureName);
 
       secretanswer = "ai";
-      aiGarbage.add(picture);
+      aiGarbage.add(pictureName);
     }
 
     //pick a new image
@@ -162,13 +171,30 @@ void checkanswer() {
   }
 }
 void answer() {
+  textAlign(CENTER);
   if (userAnswer.equals(secretanswer)) {
     background(0, 255, 0);
     text(""+score, 500, 350);
+    if(secretanswer.equals("real")){
+      textSize(15);
+      text(RealDescriptions.get(pictureName),300, 400,400,100);
+    }
+    if(secretanswer.equals("ai")){
+      textSize(15);
+      text(AiDescriptions.get(pictureName),300, 400,400,100);
+    }
     next.update();
   } else {
     background(255, 0, 0);
     text(""+score, 500, 350);
+    if(secretanswer.equals("real")){
+      textSize(15);
+      text(RealDescriptions.get(pictureName),300, 400,400,100);
+    }
+    if(secretanswer.equals("ai")){
+      textSize(15);
+      text(AiDescriptions.get(pictureName),300, 400,400,100);
+    }
     next.update();
   }
 }
@@ -190,11 +216,11 @@ void grade() {
     text("GRANDPA NEEDS A LITTLE HELP.",500, 450);
   }
   for(int i = 0;i < realGarbage.size();i++){
-    RealImages.add(realGarbage.get(i));
+    realNames.add(realGarbage.get(i));
   }
   realGarbage.clear();
   for(int i = 0;i < aiGarbage.size();i++){
-    AIImages.add(aiGarbage.get(i));
+    aiNames.add(aiGarbage.get(i));
   }
   aiGarbage.clear();
   reset.update();

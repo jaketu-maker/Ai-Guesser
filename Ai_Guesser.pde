@@ -10,8 +10,8 @@ Buttons real = new Real();
 Buttons next = new Next();
 Buttons reset = new Reset();
 boolean mouseDown = false;
-ArrayList<PImage> RealImages = new ArrayList<PImage>();
-ArrayList<PImage> AIImages = new ArrayList<PImage>();
+HashMap<String,PImage> RealImages = new HashMap<String,PImage>();
+HashMap<String,PImage> AIImages = new HashMap<String,PImage>();
 ArrayList<PImage> realGarbage = new ArrayList<PImage>();
 ArrayList<PImage> aiGarbage = new ArrayList<PImage>();
 PImage picture;
@@ -32,7 +32,8 @@ void setup() {
     for (int i = 0; i <listOfFiles.length; i++) {
       if (listOfFiles[i].isFile()) {
         println("File: " + listOfFiles[i].getName());
-        RealImages.add(loadImage(dataPath("/Real_Images") +"\\"+ listOfFiles[i].getName()));
+        String imagename = listOfFiles[i].getName().substring(0, listOfFiles[i].getName().length()-4);
+        RealImages.put(imagename,loadImage(dataPath("/Real_Images") +"\\"+ listOfFiles[i].getName()));
       }
     }
   }
@@ -42,7 +43,8 @@ void setup() {
     for (int i = 0; i <listOfAIFiles.length; i++) {
       if (listOfAIFiles[i].isFile()) {
         println("File: " + listOfAIFiles[i].getName());
-        AIImages.add(loadImage(dataPath("/Ai_Images") +"\\"+ listOfAIFiles[i].getName()));
+         String imagename = listOfAIFiles[i].getName().substring(0, listOfAIFiles[i].getName().length()-4);
+        AIImages.put(imagename,loadImage(dataPath("/Ai_Images") +"\\"+ listOfAIFiles[i].getName()));
       }
     }
   }
@@ -63,8 +65,8 @@ void setup() {
   RealDescriptions.put("Image 5", "This is a real street photograph because of the complex interplay of natural daylight and man-made signs/lanterns with accurate shadows and reflections. The paper lanterns have natural creases, varying translucency, and authentic Japanese calligraphy without AI hallucination errors. Wires, air conditioning units, and potted plants show realistic urban clutter and weathering specific to Tokyo side streets. The composition includes natural perspective distortion and environmental details like the no-entry sign that ground it in reality.");
   RealDescriptions.put("Image 6", "The photo is authentic due to the bright sun creating realistic lens flare and strong directional shadows across the cobblestones and building facades. The houses display natural material variations in brick, paint, and roof tiles with organic aging patterns. The cargo bike and flowers show believable placement and texture, while the person in the background adds natural human scale. The tree leaves and sky clouds follow realistic lighting physics common in travel photography of historic European towns.");
   RealDescriptions.put("Image 7", "This bustling market scene is real because of the intricate metalwork on lanterns with genuine patina, reflections, and varying light transmission through cutouts. The mirrors create complex, multi-layered reflections of the actual environment and photographer that would be extremely difficult for AI to maintain consistently. Brass and copper items show natural variations in polish and oxidation, while the dense arrangement of goods captures authentic marketplace chaos without artificial symmetry. Lighting and depth feel documentary-style with proper exposure handling.");
-  RealDescriptions.put("Image 8", "");
-  RealDescriptions.put("Image 9", "");
+  RealDescriptions.put("Image 8", "This is a real photograph due to the natural skin texture, subtle veins, and realistic finger positioning with authentic light and shadow interaction on the hand. The plumeria flower shows delicate natural petal gradients, slight imperfections in the yellow center, and realistic translucency where light passes through. Black nail polish has genuine glossy reflections and minor cuticle details, while the leather bracelet displays natural material texture, stitching, and embossed text. The background dried branches create organic depth of field with natural bokeh that aligns with real outdoor macro photography.");
+  RealDescriptions.put("Image 9", "This image is clearly a genuine photograph because of the natural sunlight creating realistic highlights on the water and soft shadows across the rocky riverbank. The woman's pose, curly hair with natural movement, and clothing fabric show authentic details like subtle folds and skin tones under daylight. The driftwood log has realistic weathering, cracks, and texture, while the background river current and forested hills display proper atmospheric perspective and depth. Environmental elements like the varied rocks and distant vegetation follow natural landscape composition without AI repetition or lighting inconsistencies.");
   RealDescriptions.put("Image 10", "This is a genuine wildlife-style photograph shown by the cat's natural fur texture, individual whisker details, and realistic eye reflections with accurate pupil shape. The rocky foreground and foliage have organic randomness in placement and lighting that matches natural outdoor environments. The animal's pose and gaze direction create believable interaction with its surroundings, with soft natural bokeh in the background. Subtle environmental details like leaf variations and ground debris avoid the repetitive patterns often seen in AI animal generations.");
 }
 void draw() {

@@ -118,6 +118,7 @@ void mouseReleased() {
   }
 }
 void cover() {
+  background(255);
   textSize(100);
   textAlign(CENTER, CENTER);
   text("BOT or NOT", 500, 200);

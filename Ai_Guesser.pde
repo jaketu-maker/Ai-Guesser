@@ -2,7 +2,7 @@ import java.io.File;
 PFont boldFont;
 
 enum AppStates {
-  COVER, GENNEWQUESTION, QUESTION, ANSWER, CHECKANSWER, GRADE
+  COVER, GENNEWQUESTION, QUESTION, EXPAND, ANSWER, CHECKANSWER, GRADE
 };
 AppStates currentState = AppStates.COVER;
 Buttons begin = new Begin();
@@ -25,6 +25,9 @@ HashMap<String, String> AiDescriptions = new HashMap<String, String>();
 HashMap<String, String> RealDescriptions = new HashMap<String, String>();
 ArrayList<String> realNames;
 ArrayList<String> aiNames;
+float x = 0;
+float y = 0;
+float e = 1;
 void setup() {
   background(255);
   size(1000, 700);
@@ -119,7 +122,9 @@ void draw() {
   case QUESTION:
     question();
     break;
-
+  case EXPAND:
+    expands();
+    break;
   case GRADE:
     grade();
     break;
@@ -162,6 +167,13 @@ void question() {
   image(picture, 500-(0.5*newWidth), 50, newWidth, newHeight);
   ai.update();
   real.update();
+  if(keyPressed){
+    if(key == '+'){
+      currentState = AppStates.EXPAND;
+      x= 0;
+      y=0;
+    }
+  }
 }
 void checkanswer() {
   background(#0F1729);
@@ -178,26 +190,26 @@ void answer() {
   textAlign(CENTER);
   if (userAnswer.equals(secretanswer)) {
     background(0, 255, 0);
-    text(""+score, 500, 350);
+    text(""+score+"/"+total, 500, 150);
     if(secretanswer.equals("real")){
       textSize(15);
-      text(RealDescriptions.get(pictureName),300, 400,400,100);
+      text(RealDescriptions.get(pictureName),300, 200,400,250);
     }
     if(secretanswer.equals("ai")){
       textSize(15);
-      text(AiDescriptions.get(pictureName),300, 400,400,100);
+      text(AiDescriptions.get(pictureName),300, 200,400,250);
     }
     next.update();
   } else {
-    background(200, 40, 0);
-    text(""+score, 500, 350);
+    background(255, 0, 0);
+    text(""+score+"/"+total, 500, 150);
     if(secretanswer.equals("real")){
       textSize(15);
-      text(RealDescriptions.get(pictureName),300, 400,400,100);
+      text(RealDescriptions.get(pictureName),300, 200,400,250);
     }
     if(secretanswer.equals("ai")){
       textSize(15);
-      text(AiDescriptions.get(pictureName),300, 400,400,100);
+      text(AiDescriptions.get(pictureName),300, 200,400,250);
     }
     next.update();
   }
@@ -229,4 +241,32 @@ void grade() {
   aiGarbage.clear();
   reset.update();
   
+}
+void mouseWheel(MouseEvent event){
+  e += event.getCount()/20.0f;
+}
+void expands(){
+  background(255);
+  float w = picture.width*e;
+  float h = picture.height*e;
+
+  image(picture,x,y,w,h);
+  if(keyPressed){
+    if(key == '-'){
+      currentState = AppStates.QUESTION;
+    }
+    if(key == 'd'){
+      x-= 10;
+    }
+    if(key == 'w'){
+      y+=10;
+    }
+    if(key=='a'){
+      x += 10;
+    }
+    if(key =='s'){
+      y -= 10;
+    }
+    
+  }
 }

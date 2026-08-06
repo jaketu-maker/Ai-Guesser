@@ -82,7 +82,7 @@ class Real extends Buttons{
 }
 class Next extends Buttons{
   public Next(){
-    super(400,500,200,40,"NEXT",45);
+    super(400,400,200,40,"NEXT",45);
   }
   void action(){
     if(total == 10){

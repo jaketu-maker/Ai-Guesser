@@ -5,17 +5,18 @@ class Buttons{
   int size;
   int w;
   int h;
-  public Buttons(int x, int y, int w, int h, String text,int size){
+  color c;
+  public Buttons(int x, int y, int w, int h, String text,int size,color c){
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h; 
     this.text = text;
     this.size = size;
-    
+    this.c = c;
   }
   void show(){
-    fill(255);
+    fill(c);
     rect(x,y,w,h);
     fill(0);
     textAlign(CENTER, CENTER);
@@ -48,10 +49,10 @@ class Buttons{
 }
 class Begin extends Buttons{
   public Begin(){
-    super(400,500,200,40,"Begin",15);
+    super(325,500,350,70,"BEGIN",35, #00ccff);
   }
   void show(){
-    fill(0,255,0);
+    fill(0,144,255);
     rect(x,y,w,h);
     fill(0);
     textAlign(CENTER, CENTER);
@@ -64,7 +65,7 @@ class Begin extends Buttons{
 }
 class Ai extends Buttons{
   public Ai(){
-    super(25,600,400,80,"AI",45);
+    super(50,550,400,80,"AI",45,#ff6600);
   }
   void action(){
     userAnswer = "ai";
@@ -73,7 +74,7 @@ class Ai extends Buttons{
 }
 class Real extends Buttons{
   public Real(){
-    super(575,600,400,80,"REAL",45);
+    super(550,550,400,80,"REAL",45,#00ddaa);
   }
   void action(){
     userAnswer = "real";
@@ -82,7 +83,7 @@ class Real extends Buttons{
 }
 class Next extends Buttons{
   public Next(){
-    super(400,400,200,40,"NEXT",45);
+    super(400,400,200,40,"NEXT",35,#00ccff);
   }
   void action(){
     if(total == 10){
@@ -96,7 +97,7 @@ class Next extends Buttons{
 }
 class Reset extends Buttons{
   public Reset(){
-    super(400,600,200,40,"RESET",45);
+    super(400,600,200,40,"RESET",45,#00ccff);
   }
   void action(){
     score = 0;

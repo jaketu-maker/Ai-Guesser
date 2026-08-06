@@ -1,4 +1,5 @@
 import java.io.File;
+PFont boldFont;
 
 enum AppStates {
   COVER, GENNEWQUESTION, QUESTION, EXPAND, ANSWER, CHECKANSWER, GRADE
@@ -30,6 +31,7 @@ float e = 1;
 void setup() {
   background(255);
   size(1000, 700);
+  boldFont = createFont("Arial-BoldMT",100);
   println(dataPath("/Real_Images"));
   File Realfolder = new File(dataPath("/Real_Images"));
   File[] listOfFiles = Realfolder.listFiles();
@@ -139,14 +141,16 @@ void mouseReleased() {
   }
 }
 void cover() {
-  background(255);
+  background(#0F172A);
   textSize(100);
   textAlign(CENTER, CENTER);
+  fill(255);
+  textFont(boldFont);
   text("BOT or NOT", 500, 200);
   begin.update();
 }
 void question() {
-  background(255);
+  background(#0F1729);
   //original width and height of the image
   int imgWidth = picture.width;
   int imgHeight = picture.height;
@@ -172,7 +176,7 @@ void question() {
   }
 }
 void checkanswer() {
-  background(255);
+  background(#0F1729);
   if (userAnswer.equals(secretanswer)) {
     score++;
     total++;

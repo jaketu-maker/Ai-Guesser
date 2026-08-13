@@ -84,6 +84,17 @@ class Ai extends Buttons{
   public Ai(){
     super(50,550,400,80,"AI",45,#ff6600);
   }
+  void show(){
+    textFont(roboFont);
+    currentW = lerp(currentW,targetW,0.15);
+    currentH = lerp(currentH,targetH,0.15);
+    fill(c);
+    rect(x,y,currentW,currentH,20);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    textSize(size);
+    text(text,x+currentW/2,y+currentH/2);
+  }
   void action(){
     userAnswer = "ai";
     currentState = AppStates.CHECKANSWER;
@@ -91,12 +102,24 @@ class Ai extends Buttons{
 }
 class Real extends Buttons{
   public Real(){
-    super(550,550,400,80,"REAL",45,#00ddaa);
+    super(550,550,400,80,"Real",40,#00ddaa);
     
+  }
+  void show(){
+    textFont(realFont);
+    currentW = lerp(currentW,targetW,0.15);
+    currentH = lerp(currentH,targetH,0.15);
+    fill(c);
+    rect(x,y,currentW,currentH,20);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    textSize(size);
+    text(text,x+currentW/2,y+currentH/2);
   }
   void action(){
     userAnswer = "real";
     currentState = AppStates.CHECKANSWER;
+    
   }
 }
 class Next extends Buttons{

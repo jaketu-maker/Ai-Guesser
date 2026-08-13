@@ -88,6 +88,7 @@ void setup() {
   aiNames = new ArrayList<>(AIImages.keySet());
   roboFont = createFont("Robot.ttf",100);
   realFont = createFont("Real.ttf",45);
+  textFont(roboFont);
 }
 void draw() {
 
@@ -148,7 +149,7 @@ void cover() {
   textSize(100);
   textAlign(CENTER, CENTER);
   fill(255);
-  textFont(roboFont);
+  
   text("BOT or NOT", 500, 200);
   begin.update();
 }
@@ -183,6 +184,7 @@ void question() {
 }
 void checkanswer() {
   background(#0F1729);
+  textFont(roboFont);
   if (userAnswer.equals(secretanswer)) {
     score++;
     inarow++;

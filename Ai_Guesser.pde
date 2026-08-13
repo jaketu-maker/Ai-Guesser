@@ -151,6 +151,8 @@ void cover() {
 }
 void question() {
   background(#0F1729);
+  textSize(10);
+  text("Expand image by pressing '+' return to question by pressing '-' use wasd to move around the image",0,0,400,100);
   //original width and height of the image
   int imgWidth = picture.width;
   int imgHeight = picture.height;
@@ -193,11 +195,11 @@ void answer() {
     text(""+score+"/"+total, 500, 150);
     if(secretanswer.equals("real")){
       textSize(15);
-      text(RealDescriptions.get(pictureName),300, 200,400,250);
+      text(RealDescriptions.get(pictureName),300, 200,400,300);
     }
     if(secretanswer.equals("ai")){
       textSize(15);
-      text(AiDescriptions.get(pictureName),300, 200,400,250);
+      text(AiDescriptions.get(pictureName),300, 200,400,300);
     }
     next.update();
   } else {
@@ -205,11 +207,11 @@ void answer() {
     text(""+score+"/"+total, 500, 150);
     if(secretanswer.equals("real")){
       textSize(15);
-      text(RealDescriptions.get(pictureName),300, 200,400,250);
+      text(RealDescriptions.get(pictureName),300, 200,400,300);
     }
     if(secretanswer.equals("ai")){
       textSize(15);
-      text(AiDescriptions.get(pictureName),300, 200,400,250);
+      text(AiDescriptions.get(pictureName),300, 200,400,300);
     }
     next.update();
   }
@@ -247,6 +249,12 @@ void mouseWheel(MouseEvent event){
 }
 void expands(){
   background(255);
+  if(e <= 0.25){
+   e = 0.25;
+  }
+  if(e >= 5){
+   e = 5;
+  }
   float w = picture.width*e;
   float h = picture.height*e;
 

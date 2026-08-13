@@ -6,6 +6,11 @@ class Buttons{
   int w;
   int h;
   color c;
+  float targetH;
+  float targetW;
+  float currentH;
+  float currentW;
+  float scale;
   public Buttons(int x, int y, int w, int h, String text,int size,color c){
     this.x = x;
     this.y = y;
@@ -14,20 +19,31 @@ class Buttons{
     this.text = text;
     this.size = size;
     this.c = c;
+    this.targetH = h;
+    this.targetW = w;
+    this.currentH = h;
+    this.currentW = w;
+    scale = 1.1;
   }
   void show(){
+    currentW = lerp(currentW,targetW,0.15);
+    currentH = lerp(currentH,targetH,0.15);
     fill(c);
-    rect(x,y,w,h);
+    rect(x,y,currentW,currentH,20);
     fill(0);
     textAlign(CENTER, CENTER);
     textSize(size);
-    text(text,x+w/2,y+h/2);
+    text(text,x+currentW/2,y+currentH/2);
   }
   boolean overButton(){
     if (mouseX >= this.x && mouseX <= this.x + this.w && mouseY >= this.y && mouseY <= this.y + this.h){
+      targetH = h*scale;
+      targetW = w*scale;
       return true;
     }
     else{
+      targetH = h;
+      targetW = w;
       return false;
     }
   }
@@ -42,6 +58,7 @@ class Buttons{
   }
   void update(){
     this.show();
+    this.overButton();
     if(this.isClicked()){
       this.action();
     }
@@ -53,7 +70,7 @@ class Begin extends Buttons{
   }
   void show(){
     fill(0,144,255);
-    rect(x,y,w,h);
+    rect(x,y,w,h,20);
     fill(0);
     textAlign(CENTER, CENTER);
     textSize(size);
@@ -83,7 +100,7 @@ class Real extends Buttons{
 }
 class Next extends Buttons{
   public Next(){
-    super(400,400,200,40,"NEXT",35,#00ccff);
+    super(400,470,200,50,"NEXT",35,#00ccff);
   }
   void action(){
     if(total == 10){

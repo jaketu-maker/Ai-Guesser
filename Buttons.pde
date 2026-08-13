@@ -75,6 +75,7 @@ class Ai extends Buttons{
 class Real extends Buttons{
   public Real(){
     super(550,550,400,80,"REAL",45,#00ddaa);
+    
   }
   void action(){
     userAnswer = "real";

@@ -1,5 +1,7 @@
 import java.io.File;
 PFont boldFont;
+PFont roboFont;
+PFont realFont;
 
 enum AppStates {
   COVER, GENNEWQUESTION, QUESTION, EXPAND, ANSWER, CHECKANSWER, GRADE
@@ -21,6 +23,7 @@ String secretanswer = "";
 String userAnswer = "";
 int score = 0;
 int total = 0;
+int inarow = 0;
 HashMap<String, String> AiDescriptions = new HashMap<String, String>();
 HashMap<String, String> RealDescriptions = new HashMap<String, String>();
 ArrayList<String> realNames;
@@ -81,10 +84,10 @@ void setup() {
   RealDescriptions.put("Image 10", "This is a genuine wildlife-style photograph shown by the cat's natural fur texture, individual whisker details, and realistic eye reflections with accurate pupil shape. The rocky foreground and foliage have organic randomness in placement and lighting that matches natural outdoor environments. The animal's pose and gaze direction create believable interaction with its surroundings, with soft natural bokeh in the background. Subtle environmental details like leaf variations and ground debris avoid the repetitive patterns often seen in AI animal generations.");
   RealDescriptions.put("Image 11", "This image displays clear markers of a genuine photograph taken by a human photographer rather than a digital creation. The lighting is completely natural and consistent, showing authentic direct sun casting sharp, physically accurate shadows under the man's arm and across the concrete steps. Small, organic imperfections—like the realistic fabric creases around his mask, the faint scar on his left wrist, and the natural wear on the metal handrails—demonstrate raw real-world texture. Furthermore, the text printed on his shirt is perfectly crisp, structured, and legible, avoiding the warped or scrambled characters typical of AI rendering. Finally, both of his hands exhibit natural anatomical proportions with realistic skin folding around the phone.");
 
-  
   realNames = new ArrayList<>(RealImages.keySet());
   aiNames = new ArrayList<>(AIImages.keySet());
-
+  roboFont = createFont("Robot.ttf",100);
+  realFont = createFont("Real.ttf",45);
 }
 void draw() {
 
@@ -145,7 +148,7 @@ void cover() {
   textSize(100);
   textAlign(CENTER, CENTER);
   fill(255);
-  textFont(boldFont);
+  textFont(roboFont);
   text("BOT or NOT", 500, 200);
   begin.update();
 }
@@ -179,10 +182,13 @@ void checkanswer() {
   background(#0F1729);
   if (userAnswer.equals(secretanswer)) {
     score++;
+    inarow++;
     total++;
     currentState = AppStates.ANSWER;
-  } else {
+  } 
+  else {
     total++;
+    inarow = 0;
     currentState = AppStates.ANSWER;
   }
 }
@@ -199,6 +205,10 @@ void answer() {
       textSize(15);
       text(AiDescriptions.get(pictureName),300, 200,400,250);
     }
+    if (inarow >= 3){
+      textSize(30);
+      text("🔥"+inarow+" In A Row!",860,40);
+    }
     next.update();
   } else {
     background(255, 0, 0);
@@ -214,6 +224,7 @@ void answer() {
     next.update();
   }
 }
+
 void grade() {
   background(255);
   textSize(50);

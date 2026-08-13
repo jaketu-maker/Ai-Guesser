@@ -155,7 +155,8 @@ void cover() {
 void question() {
   background(#0F1729);
   textSize(10);
-  text("Expand image by pressing '+' return to question by pressing '-' use wasd to move around the image",0,0,400,100);
+  fill(255);
+  text("Expand image by pressing '+'; return to question by pressing '-'; use wasd to move around the image",0,-20,400,100);
   //original width and height of the image
   int imgWidth = picture.width;
   int imgHeight = picture.height;

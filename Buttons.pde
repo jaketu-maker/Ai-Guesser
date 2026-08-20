@@ -66,7 +66,7 @@ class Buttons{
 }
 class Begin extends Buttons{
   public Begin(){
-    super(325,500,350,70,"BEGIN",35, #00ccff);
+    super(325,450,350,70,"BEGIN",35, #00ccff);
   }
   void show(){
     fill(0,144,255);

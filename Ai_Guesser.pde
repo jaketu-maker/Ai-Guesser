@@ -204,11 +204,11 @@ void answer() {
     text(""+score+"/"+total, 500, 150);
     if(secretanswer.equals("real")){
       textSize(15);
-      text(RealDescriptions.get(pictureName),300, 200,400,300);
+      text(RealDescriptions.get(pictureName),250, 200,500,300);
     }
     if(secretanswer.equals("ai")){
       textSize(15);
-      text(AiDescriptions.get(pictureName),300, 200,400,300);
+      text(AiDescriptions.get(pictureName),250, 200,500,300);
     }
     if (inarow >= 3){
       textSize(30);
@@ -220,11 +220,11 @@ void answer() {
     text(""+score+"/"+total, 500, 150);
     if(secretanswer.equals("real")){
       textSize(15);
-      text(RealDescriptions.get(pictureName),300, 200,400,300);
+      text(RealDescriptions.get(pictureName),250, 200,500,300);
     }
     if(secretanswer.equals("ai")){
       textSize(15);
-      text(AiDescriptions.get(pictureName),300, 200,400,300);
+      text(AiDescriptions.get(pictureName),250, 200,500,300);
     }
     next.update();
   }

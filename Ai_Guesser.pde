@@ -2,6 +2,7 @@ import java.io.File;
 PFont boldFont;
 PFont roboFont;
 PFont realFont;
+PFont defFont;
 
 enum AppStates {
   COVER, GENNEWQUESTION, QUESTION, EXPAND, ANSWER, CHECKANSWER, GRADE
@@ -88,6 +89,7 @@ void setup() {
   aiNames = new ArrayList<>(AIImages.keySet());
   roboFont = createFont("Robot.ttf",100);
   realFont = createFont("Real.ttf",45);
+  defFont = createFont("SansSerid", 12);
   textFont(roboFont);
 }
 void draw() {
@@ -157,7 +159,8 @@ void question() {
   background(#0F1729);
   textSize(10);
   fill(255);
-  text("Expand image by pressing '+'; return to question by pressing '-'; use wasd to move around the image",0,-20,400,100);
+  textFont(defFont);
+  text("Expand image by pressing '+'; return to question by pressing '-'; use wasd to move around the image",0,-20,600,100);
   //original width and height of the image
   int imgWidth = picture.width;
   int imgHeight = picture.height;
@@ -172,6 +175,10 @@ void question() {
   newWidth = floor(imgWidth*m);
   newHeight = floor(imgHeight*m);
   image(picture, 500-(0.5*newWidth), 50, newWidth, newHeight);
+  stroke(0);
+  strokeWeight(5);
+  noFill();
+  rect(500-(0.5*newWidth), 50, newWidth, newHeight);
   ai.update();
   real.update();
   if(keyPressed){
